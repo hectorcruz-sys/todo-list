@@ -2,25 +2,20 @@ const tareaInput = document.getElementById('tarea');
 const botonAgregar = document.getElementById('agregar');
 const listaTareas = document.getElementById('lista-tareas');
 
-// Crear botón modo oscuro
-const botonModo = document.createElement('button');
-botonModo.textContent = '🌙 Modo Oscuro';
-document.body.prepend(botonModo);
-
-// Cambiar modo oscuro
-botonModo.addEventListener('click', () => {
-  document.body.classList.toggle('oscuro');
+// Agregar tarea
+botonAgregar.addEventListener('click', () => {
+  agregarTarea();
 });
 
 // Cargar tareas guardadas
 window.addEventListener('load', cargarTareas);
 
-// Agregar tarea
-botonAgregar.addEventListener('click', agregarTarea);
-
+// Función agregar tarea
 function agregarTarea(textoGuardado = null, completada = false){
 
-  const texto = textoGuardado || tareaInput.value.trim();
+  const texto = textoGuardado !== null
+    ? textoGuardado
+    : tareaInput.value.trim();
 
   if(texto === '') return;
 
@@ -39,13 +34,13 @@ function agregarTarea(textoGuardado = null, completada = false){
     </div>
   `;
 
-  // Botón completar
+  // Completar tarea
   li.querySelector('.completar').addEventListener('click', () => {
     li.classList.toggle('completada');
     guardarTareas();
   });
 
-  // Botón eliminar
+  // Eliminar tarea
   li.querySelector('.eliminar').addEventListener('click', () => {
     li.remove();
     guardarTareas();
@@ -58,7 +53,7 @@ function agregarTarea(textoGuardado = null, completada = false){
   guardarTareas();
 }
 
-// Guardar en localStorage
+// Guardar tareas
 function guardarTareas(){
 
   const tareas = [];
