@@ -2,6 +2,31 @@ const tareaInput = document.getElementById('tarea');
 const botonAgregar = document.getElementById('agregar');
 const listaTareas = document.getElementById('lista-tareas');
 const botonModo = document.getElementById('modoOscuro');
+const frase = document.getElementById('frase');
+
+// FRASES MOTIVACIONALES
+
+const frases = [
+
+  "Pequeños avances siguen siendo avances 🚀",
+
+  "No tienes que ser perfecto, solo constante 💪",
+
+  "Tu futuro se construye hoy ✨",
+
+  "Cada tarea terminada es progreso 🔥",
+
+  "Sigue adelante aunque sea poco a poco 😎",
+
+  "La disciplina vence a la motivación 📚"
+
+];
+
+// Frase aleatoria
+const fraseAleatoria =
+  frases[Math.floor(Math.random() * frases.length)];
+
+frase.textContent = fraseAleatoria;
 
 // Modo oscuro
 botonModo.addEventListener('click', () => {
@@ -25,7 +50,6 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
 
   if(texto === '') return;
 
-  // Fecha y hora actual
   const fecha = fechaGuardada || new Date().toLocaleString();
 
   const li = document.createElement('li');
