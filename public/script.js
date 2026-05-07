@@ -1,10 +1,15 @@
 const tareaInput = document.getElementById('tarea');
+
 const botonAgregar = document.getElementById('agregar');
+
 const listaTareas = document.getElementById('lista-tareas');
+
 const botonModo = document.getElementById('modoOscuro');
+
 const frase = document.getElementById('frase');
 
 const musica = document.getElementById('musica');
+
 const musicaBtn = document.getElementById('musicaBtn');
 
 // FRASES
@@ -25,7 +30,8 @@ const frases = [
 
 ];
 
-// Frase aleatoria
+// FRASE ALEATORIA
+
 const fraseAleatoria =
   frases[Math.floor(Math.random() * frases.length)];
 
@@ -45,21 +51,21 @@ let reproduciendo = false;
 
 musicaBtn.addEventListener('click', () => {
 
-  if(!reproduciendo){
-
-    musica.play();
-
-    musicaBtn.textContent = '⏸ Pausar Música';
-
-    reproduciendo = true;
-
-  }else{
+  if(reproduciendo){
 
     musica.pause();
 
     musicaBtn.textContent = '🎵 Música';
 
     reproduciendo = false;
+
+  }else{
+
+    musica.play();
+
+    musicaBtn.textContent = '⏸ Pausar Música';
+
+    reproduciendo = true;
   }
 
 });
@@ -78,7 +84,11 @@ window.addEventListener('load', cargarTareas);
 
 // FUNCIÓN AGREGAR
 
-function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = null){
+function agregarTarea(
+  textoGuardado = null,
+  completada = false,
+  fechaGuardada = null
+){
 
   const texto = textoGuardado !== null
     ? textoGuardado
@@ -86,7 +96,8 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
 
   if(texto === '') return;
 
-  const fecha = fechaGuardada || new Date().toLocaleString();
+  const fecha =
+    fechaGuardada || new Date().toLocaleString();
 
   const li = document.createElement('li');
 
@@ -107,27 +118,34 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
     </div>
 
     <div>
+
       <button class="completar">✔</button>
+
       <button class="eliminar">X</button>
+
     </div>
   `;
 
-  // Completar
+  // COMPLETAR
 
-  li.querySelector('.completar').addEventListener('click', () => {
+  li.querySelector('.completar')
+    .addEventListener('click', () => {
 
-    li.classList.toggle('completada');
+      li.classList.toggle('completada');
 
-    guardarTareas();
+      guardarTareas();
+
   });
 
-  // Eliminar
+  // ELIMINAR
 
-  li.querySelector('.eliminar').addEventListener('click', () => {
+  li.querySelector('.eliminar')
+    .addEventListener('click', () => {
 
-    li.remove();
+      li.remove();
 
-    guardarTareas();
+      guardarTareas();
+
   });
 
   listaTareas.appendChild(li);
@@ -137,7 +155,7 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
   guardarTareas();
 }
 
-// GUARDAR TAREAS
+// GUARDAR
 
 function guardarTareas(){
 
@@ -147,24 +165,31 @@ function guardarTareas(){
 
     tareas.push({
 
-      texto: li.querySelector('span').textContent,
+      texto:
+        li.querySelector('span').textContent,
 
-      fecha: li.querySelector('small').textContent,
+      fecha:
+        li.querySelector('small').textContent,
 
-      completada: li.classList.contains('completada')
+      completada:
+        li.classList.contains('completada')
 
     });
 
   });
 
-  localStorage.setItem('tareas', JSON.stringify(tareas));
+  localStorage.setItem(
+    'tareas',
+    JSON.stringify(tareas)
+  );
 }
 
-// CARGAR TAREAS
+// CARGAR
 
 function cargarTareas(){
 
-  const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+  const tareas =
+    JSON.parse(localStorage.getItem('tareas')) || [];
 
   tareas.forEach(tarea => {
 
