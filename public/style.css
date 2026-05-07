@@ -275,3 +275,11 @@ small{
   }
 
 }
+.youtube-player{
+
+  margin-top:20px;
+
+  border-radius:15px;
+
+  overflow:hidden;
+}

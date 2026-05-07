@@ -1,16 +1,17 @@
-const tareaInput = document.getElementById('tarea');
+const tareaInput =
+  document.getElementById('tarea');
 
-const botonAgregar = document.getElementById('agregar');
+const botonAgregar =
+  document.getElementById('agregar');
 
-const listaTareas = document.getElementById('lista-tareas');
+const listaTareas =
+  document.getElementById('lista-tareas');
 
-const botonModo = document.getElementById('modoOscuro');
+const botonModo =
+  document.getElementById('modoOscuro');
 
-const frase = document.getElementById('frase');
-
-const musica = document.getElementById('musica');
-
-const musicaBtn = document.getElementById('musicaBtn');
+const frase =
+  document.getElementById('frase');
 
 // FRASES
 
@@ -45,31 +46,6 @@ botonModo.addEventListener('click', () => {
 
 });
 
-// MÚSICA
-
-let reproduciendo = false;
-
-musicaBtn.addEventListener('click', () => {
-
-  if(reproduciendo){
-
-    musica.pause();
-
-    musicaBtn.textContent = '🎵 Música';
-
-    reproduciendo = false;
-
-  }else{
-
-    musica.play();
-
-    musicaBtn.textContent = '⏸ Pausar Música';
-
-    reproduciendo = true;
-  }
-
-});
-
 // AGREGAR TAREA
 
 botonAgregar.addEventListener('click', () => {
@@ -90,16 +66,19 @@ function agregarTarea(
   fechaGuardada = null
 ){
 
-  const texto = textoGuardado !== null
+  const texto =
+    textoGuardado !== null
     ? textoGuardado
     : tareaInput.value.trim();
 
   if(texto === '') return;
 
   const fecha =
-    fechaGuardada || new Date().toLocaleString();
+    fechaGuardada ||
+    new Date().toLocaleString();
 
-  const li = document.createElement('li');
+  const li =
+    document.createElement('li');
 
   if(completada){
 
@@ -161,7 +140,8 @@ function guardarTareas(){
 
   const tareas = [];
 
-  document.querySelectorAll('li').forEach(li => {
+  document.querySelectorAll('li')
+    .forEach(li => {
 
     tareas.push({
 
@@ -189,7 +169,9 @@ function guardarTareas(){
 function cargarTareas(){
 
   const tareas =
-    JSON.parse(localStorage.getItem('tareas')) || [];
+    JSON.parse(
+      localStorage.getItem('tareas')
+    ) || [];
 
   tareas.forEach(tarea => {
 
