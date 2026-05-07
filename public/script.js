@@ -1,6 +1,12 @@
 const tareaInput = document.getElementById('tarea');
 const botonAgregar = document.getElementById('agregar');
 const listaTareas = document.getElementById('lista-tareas');
+const botonModo = document.getElementById('modoOscuro');
+
+// Modo oscuro
+botonModo.addEventListener('click', () => {
+  document.body.classList.toggle('oscuro');
+});
 
 // Agregar tarea
 botonAgregar.addEventListener('click', () => {
@@ -11,13 +17,16 @@ botonAgregar.addEventListener('click', () => {
 window.addEventListener('load', cargarTareas);
 
 // Función agregar tarea
-function agregarTarea(textoGuardado = null, completada = false){
+function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = null){
 
   const texto = textoGuardado !== null
     ? textoGuardado
     : tareaInput.value.trim();
 
   if(texto === '') return;
+
+  // Fecha y hora actual
+  const fecha = fechaGuardada || new Date().toLocaleString();
 
   const li = document.createElement('li');
 
@@ -26,7 +35,15 @@ function agregarTarea(textoGuardado = null, completada = false){
   }
 
   li.innerHTML = `
-    <span>${texto}</span>
+    <div>
+
+      <span>${texto}</span>
+
+      <br>
+
+      <small>${fecha}</small>
+
+    </div>
 
     <div>
       <button class="completar">✔</button>
@@ -36,13 +53,17 @@ function agregarTarea(textoGuardado = null, completada = false){
 
   // Completar tarea
   li.querySelector('.completar').addEventListener('click', () => {
+
     li.classList.toggle('completada');
+
     guardarTareas();
   });
 
   // Eliminar tarea
   li.querySelector('.eliminar').addEventListener('click', () => {
+
     li.remove();
+
     guardarTareas();
   });
 
@@ -61,8 +82,13 @@ function guardarTareas(){
   document.querySelectorAll('li').forEach(li => {
 
     tareas.push({
+
       texto: li.querySelector('span').textContent,
+
+      fecha: li.querySelector('small').textContent,
+
       completada: li.classList.contains('completada')
+
     });
 
   });
@@ -76,6 +102,12 @@ function cargarTareas(){
   const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
 
   tareas.forEach(tarea => {
-    agregarTarea(tarea.texto, tarea.completada);
+
+    agregarTarea(
+      tarea.texto,
+      tarea.completada,
+      tarea.fecha
+    );
+
   });
 }
