@@ -4,7 +4,10 @@ const listaTareas = document.getElementById('lista-tareas');
 const botonModo = document.getElementById('modoOscuro');
 const frase = document.getElementById('frase');
 
-// FRASES MOTIVACIONALES
+const musica = document.getElementById('musica');
+const musicaBtn = document.getElementById('musicaBtn');
+
+// FRASES
 
 const frases = [
 
@@ -28,20 +31,53 @@ const fraseAleatoria =
 
 frase.textContent = fraseAleatoria;
 
-// Modo oscuro
+// MODO OSCURO
+
 botonModo.addEventListener('click', () => {
+
   document.body.classList.toggle('oscuro');
+
 });
 
-// Agregar tarea
+// MÚSICA
+
+let reproduciendo = false;
+
+musicaBtn.addEventListener('click', () => {
+
+  if(!reproduciendo){
+
+    musica.play();
+
+    musicaBtn.textContent = '⏸ Pausar Música';
+
+    reproduciendo = true;
+
+  }else{
+
+    musica.pause();
+
+    musicaBtn.textContent = '🎵 Música';
+
+    reproduciendo = false;
+  }
+
+});
+
+// AGREGAR TAREA
+
 botonAgregar.addEventListener('click', () => {
+
   agregarTarea();
+
 });
 
-// Cargar tareas guardadas
+// CARGAR TAREAS
+
 window.addEventListener('load', cargarTareas);
 
-// Función agregar tarea
+// FUNCIÓN AGREGAR
+
 function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = null){
 
   const texto = textoGuardado !== null
@@ -55,6 +91,7 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
   const li = document.createElement('li');
 
   if(completada){
+
     li.classList.add('completada');
   }
 
@@ -75,7 +112,8 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
     </div>
   `;
 
-  // Completar tarea
+  // Completar
+
   li.querySelector('.completar').addEventListener('click', () => {
 
     li.classList.toggle('completada');
@@ -83,7 +121,8 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
     guardarTareas();
   });
 
-  // Eliminar tarea
+  // Eliminar
+
   li.querySelector('.eliminar').addEventListener('click', () => {
 
     li.remove();
@@ -98,7 +137,8 @@ function agregarTarea(textoGuardado = null, completada = false, fechaGuardada = 
   guardarTareas();
 }
 
-// Guardar tareas
+// GUARDAR TAREAS
+
 function guardarTareas(){
 
   const tareas = [];
@@ -120,7 +160,8 @@ function guardarTareas(){
   localStorage.setItem('tareas', JSON.stringify(tareas));
 }
 
-// Cargar tareas
+// CARGAR TAREAS
+
 function cargarTareas(){
 
   const tareas = JSON.parse(localStorage.getItem('tareas')) || [];

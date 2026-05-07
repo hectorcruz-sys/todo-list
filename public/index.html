@@ -7,10 +7,8 @@
 
   <title>Lista de Tareas</title>
 
-  <!-- Icono de pestaña -->
   <link rel="icon" href="icono.png">
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -21,14 +19,17 @@
     <!-- Logo -->
     <img src="logo.png" class="logo">
 
+    <!-- Título -->
     <h1>Lista de Tareas</h1>
 
+    <!-- Frase -->
     <p id="frase"></p>
 
+    <!-- Input -->
     <div class="input-area">
 
       <input 
-        type="text" 
+        type="text"
         id="tarea"
         placeholder="Escribe una tarea..."
       >
@@ -39,14 +40,25 @@
 
     </div>
 
+    <!-- Lista -->
     <ul id="lista-tareas"></ul>
 
-    <!-- Botón modo oscuro -->
+    <!-- Música -->
+    <button id="musicaBtn">
+      🎵 Música
+    </button>
+
+    <!-- Modo oscuro -->
     <button id="modoOscuro">
       🌙 Modo Oscuro
     </button>
 
   </div>
+
+  <!-- Audio -->
+  <audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
 
   <script src="script.js"></script>
 
